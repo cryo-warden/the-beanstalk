@@ -11,8 +11,8 @@ const addPath = (idToRoom, addressA, addressB) => {
   const roomA = idToRoom[addressAString];
   const roomB = idToRoom[addressBString];
 
-  roomA.paths.push(addressBString);
-  roomB.paths.push(addressAString);
+  roomA.paths.add(addressBString);
+  roomB.paths.add(addressAString);
 };
 
 const addRoomsToArea = ({
@@ -29,7 +29,7 @@ const addRoomsToArea = ({
 
     idToRoom[JSON.stringify(roomAddress)] = {
       address: roomAddress,
-      paths: [],
+      paths: new Set(),
     };
   });
 
@@ -90,6 +90,10 @@ const createArea = ({
     layout,
     idToRoom: area.idToRoom,
     createRoomID: createIDFactory(),
+  });
+
+  Object.values(area.idToRoom).forEach((room) => {
+    room.paths = [...room.paths];
   });
 
   return area;

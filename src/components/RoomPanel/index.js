@@ -27,7 +27,6 @@ const RoomPanel = ({
     layout,
   });
   const room = area.idToRoom[JSON.stringify(address)];
-  console.log({ layout, area, room });
 
   return (
     <Panel>
