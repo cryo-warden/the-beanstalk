@@ -2,7 +2,7 @@ import {
   createRange,
   createRNG,
   mapCount,
-} from "../utils";
+} from '../utils';
 
 const createLayout = ({
   address,
@@ -15,6 +15,9 @@ const createLayout = ({
   const branchCount = rng.nextIntFromRange(branchCountRange);
 
   const branches = mapCount(branchCount, (i) => {
+    // TODO Implement one-way layout portions.
+    // TODO Implement locks.
+    // TODO Use layout for larger-scale meta-layout. Make a big layout for the whole game, where the locks are based on major items.
     return {
       entryIndex: rng.nextIntFromRange(createRange(0, size)),
       exitIndex: (rng.nextUnity() < complexity
@@ -24,7 +27,7 @@ const createLayout = ({
       layout: createLayout({
         address: [
           ...address,
-          ["branch", i],
+          ['branch', i],
         ],
         sizeRange: createRange(1, complexity * size),
         branchCountRange: createRange(

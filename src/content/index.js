@@ -1,5 +1,5 @@
-import createArea from "./createArea";
-import createLayout from "./createLayout";
+import createArea from './createArea';
+import createLayout from './createLayout';
 
 export {
   createArea,

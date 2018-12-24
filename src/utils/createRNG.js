@@ -1,4 +1,4 @@
-import createSeedRandomRNG from "seedrandom";
+import createSeedRandomRNG from 'seedrandom';
 
 const createRNG = (seed) => {
   const seedRandomRNG = createSeedRandomRNG(seed);

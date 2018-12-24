@@ -1,0 +1,12 @@
+.Panel {
+  display: flex;
+  flex-direction: column;
+
+  margin: 4px;
+  padding: 4px;
+  border: outset 1px grey;
+  border-radius: 8px;
+
+  background-color: #222;
+  color: #880;
+};
