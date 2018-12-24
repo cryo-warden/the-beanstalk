@@ -8,7 +8,6 @@ const createRNG = (seed) => {
     nextUnity: () => seedRandomRNG.double(),
     nextFromRange: (range) => range.start + range.size * seedRandomRNG.double(),
     nextIntFromRange: (range) => Math.floor(range.start + range.size * seedRandomRNG.double()),
-    createRNG: (subSeed) => createRNG(`${subSeed}(${seed})`),
   };
 };
 
