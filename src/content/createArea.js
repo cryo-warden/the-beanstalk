@@ -1,6 +1,5 @@
 import {
   createIDFactory,
-  createRNG,
   forEachCount,
 } from '../utils';
 
@@ -16,14 +15,14 @@ const addPath = (idToRoom, addressA, addressB) => {
 };
 
 const addRoomsToArea = ({
-  address,
+  addressParts,
   layout,
   idToRoom,
   createRoomID,
 }) => {
   forEachCount(layout.size, (i) => {
     const roomAddress = [
-      ...address,
+      ...addressParts,
       ['room', i],
     ];
 
@@ -35,41 +34,41 @@ const addRoomsToArea = ({
 
   forEachCount(layout.size - 1, (i) => {
     addPath(idToRoom, [
-      ...address,
+      ...addressParts,
       ['room', i],
     ], [
-      ...address,
+      ...addressParts,
       ['room', i + 1],
     ]);
   });
 
   layout.branches.forEach((branch, i) => {
-    const branchAddress = [
-      ...address,
+    const branchAddressParts = [
+      ...addressParts,
       ['branch', i],
     ];
 
     addRoomsToArea({
-      address: branchAddress,
+      addressParts: branchAddressParts,
       layout: branch.layout,
       idToRoom,
       createRoomID,
     });
 
     addPath(idToRoom, [
-      ...address,
+      ...addressParts,
       ['room', branch.entryIndex],
     ], [
-      ...branchAddress,
+      ...branchAddressParts,
       ['room', 0],
     ]);
 
     if (branch.exitIndex != null) {
       addPath(idToRoom, [
-        ...address,
+        ...addressParts,
         ['room', branch.exitIndex],
       ], [
-        ...branchAddress,
+        ...branchAddressParts,
         ['room', branch.layout.size - 1],
       ]);
     }
@@ -86,7 +85,7 @@ const createArea = ({
   };
 
   addRoomsToArea({
-    address,
+    addressParts: JSON.parse(address),
     layout,
     idToRoom: area.idToRoom,
     createRoomID: createIDFactory(),

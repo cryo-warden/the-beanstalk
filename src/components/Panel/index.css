@@ -1,6 +1,5 @@
 .Panel {
-  display: flex;
-  flex-direction: column;
+  flex: 1 1 auto;
 
   margin: 4px;
   padding: 4px;

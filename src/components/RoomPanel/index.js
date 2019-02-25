@@ -2,62 +2,58 @@ import React from 'react';
 import * as ReactRedux from 'react-redux';
 
 import {
-  createLayout,
-  createArea,
+  getRoom,
 } from '../../content';
-import {
-  createRange,
-} from '../../utils';
 
 import Panel from '../Panel';
 
 const RoomPanel = ({
-  address,
-  areaAddress,
-  setAddress,
+  room,
+  setTarget,
 }) => {
-  const layout = createLayout({
-    address: areaAddress,
-    sizeRange: createRange(3, 12),
-    branchCountRange: createRange(2, 5),
-    complexity: 1,
-  });
-  const area = createArea({
-    address: areaAddress,
-    layout,
-  });
-  const room = area.idToRoom[JSON.stringify(address)];
-
   return (
     <Panel>
-      <h3>{JSON.stringify(address)}</h3>
-      <div>
-        {room.paths.map((path) => {
-          return (
-            <div
-              key={path}
-              onClick={() => {
-                setAddress(JSON.parse(path));
-              }}
-            >
-              {path}
-            </div>
-          );
-        })}
-      </div>
+      {room && room.paths.map((path) => {
+        return (
+          <span
+            key={path}
+            onClick={() => {
+              setTarget({
+                type: 'path',
+                value: path,
+              });
+            }}
+          >
+            {path}
+          </span>
+        );
+      })}
     </Panel>
   );
 };
 
 const mapStateToProps = (state) => {
-  return {
-    address: state.address,
-    areaAddress: [state.address[0]],
-  };
+  const {
+    addressToRoomDelta,
+    idToCharacter,
+    playerID,
+  } = state;
+  const player = idToCharacter[playerID];
+  const roomDelta = addressToRoomDelta[player.address];
+
+  const room = getRoom(player.address, roomDelta);
+
+  return { room };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setTarget: (target) => {
+      dispatch({
+        type: "setTarget",
+        target,
+      });
+    },
     setAddress: (address) => {
       dispatch({
         type: "setAddress",

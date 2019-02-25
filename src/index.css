@@ -9,7 +9,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body, #root, div {
+html, body, #root {
   margin: 0;
   padding: 0;
 

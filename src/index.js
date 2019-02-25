@@ -11,11 +11,28 @@ import * as content from './content';
 import * as utils from './utils';
 
 const store = Redux.createStore((state = {
-  address: [
-    ['area', 0],
-    ['room', 0],
-  ],
+  playerID: 'player',
+  target: {
+    type: null,
+    id: null,
+  },
+  idToCharacter: {
+    player: {
+      address: JSON.stringify([
+        ['area', 0],
+        ['room', 0],
+      ]),
+    },
+  },
+  addressToRoomDelta: {},
 }, action) => {
+  if (action.type === 'setTarget') {
+    return {
+      ...state,
+      target: action.target,
+    };
+  }
+
   if (action.type === 'setAddress') {
     return {
       ...state,
