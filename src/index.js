@@ -1,46 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
 
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
+import store from './store';
+
 import * as content from './content';
 import * as utils from './utils';
-
-const store = Redux.createStore((state = {
-  playerID: 'player',
-  target: {
-    type: null,
-    id: null,
-  },
-  idToCharacter: {
-    player: {
-      address: JSON.stringify([
-        ['area', 0],
-        ['room', 0],
-      ]),
-    },
-  },
-  addressToRoomDelta: {},
-}, action) => {
-  if (action.type === 'setTarget') {
-    return {
-      ...state,
-      target: action.target,
-    };
-  }
-
-  if (action.type === 'setAddress') {
-    return {
-      ...state,
-      address: action.address,
-    };
-  }
-
-  return state;
-});
 
 window.dev = {
   content,
