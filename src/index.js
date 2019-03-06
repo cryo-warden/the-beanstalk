@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
 
-import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
